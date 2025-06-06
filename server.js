@@ -35,7 +35,15 @@ app.get('/health', (req, res) => {
 
 // API key endpoint
 app.get("/key", (req, res) => {
+  console.log('API Key request received');
+  console.log('Environment variables:', {
+    hasApiKey: !!process.env.API_KEY,
+    nodeEnv: process.env.NODE_ENV,
+    frontendUrl: process.env.FRONTEND_URL
+  });
+
   if (!process.env.API_KEY) {
+    console.log('API Key is missing in environment');
     return res.status(500).json({ 
       status: 'error',
       message: 'API key not configured'
