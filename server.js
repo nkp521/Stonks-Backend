@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Default to Vite's default port
+  origin: ['https://stock-dashboard-7vvt.onrender.com', 'http://localhost:5173'], // Allow both production and development URLs
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
