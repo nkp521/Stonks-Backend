@@ -34,7 +34,7 @@ app.get('/health', (req, res) => {
 });
 
 // API key endpoint
-app.get("/api/key", (req, res) => {
+app.get("/key", (req, res) => {
   if (!process.env.API_KEY) {
     return res.status(500).json({ 
       status: 'error',
