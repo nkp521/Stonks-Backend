@@ -9,14 +9,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS configuration
-const corsOptions = {
-  origin: ['https://stock-dashboard-7vvt.onrender.com', 'http://localhost:5173'], // Allow both production and development URLs
+// Enable CORS for all origins
+app.use(cors({
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-};
-app.use(cors(corsOptions));
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -49,6 +47,12 @@ app.get("/key", (req, res) => {
       message: 'API key not configured'
     });
   }
+  
+  // Set CORS headers explicitly
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
   res.json({ apiKey: process.env.API_KEY });
 });
 
